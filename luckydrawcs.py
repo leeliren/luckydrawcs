@@ -16,14 +16,14 @@ with open('BuildingBloCS.csv',newline="") as csvfile:
         winner = random.randint(1,len(name)-1)
         if occupation[winner] == "Student":
             return name[winner], school[winner]
-        elif occupation[winner] == "Teacher": #teachers cant win?
+        elif occupation[winner] == "Teacher": #teachers cant win
             return luckydraw()
 
-    def kindlewinner():
+    def kindlewinner():#signups on pi day
         winner = random.randint(1,13)
         if occupation[winner] == "Student":
             return name[winner], school[winner]
-        elif occupation[winner] == "Teacher": #teachers cant win?
+        elif occupation[winner] == "Teacher": #teachers cant win
             return kindlewinner()
         
     def display(prize):
@@ -35,7 +35,7 @@ with open('BuildingBloCS.csv',newline="") as csvfile:
             print("Kindle winner is ",end = "")
             winner = kindlewinner()[0]
             school = kindlewinner()[1]
-        for i in range (4):
+        for i in range (4): #for the suspense :)
             time.sleep(.5)
             print(".",end = "")
         print(winner,"from", school, "!!")
