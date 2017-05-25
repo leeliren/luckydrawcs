@@ -5,32 +5,36 @@ with open('BuildingBloCS.csv',newline="") as csvfile:
     occupation = []
     name = []
     school = []
-    day = []
+    signupdate = []#because of the first row
     chance = []
+    realdate = []
 
     for row in file:
         occupation.append(row[5])
         name.append(row[2])
         school.append(row[3])
         date = row[0].split()[0]
-        day.append(date)
-    for i in day:
-        curr = datetime.date(
+        signupdate.append(date)
+        
+    chances = 1
+    for i in range(1,len(signupdate)):
+        month = int(signupdate[i].split("/")[0])
+        day = int(signupdate[i].split("/")[1])
+        year = int(signupdate[i].split("/")[2])
+        curr = datetime.date(year,month,day)
+        realdate.append(curr)
+        print(realdate)
+    for i in range (len(realdate)-1),1:
+        if realdate[i+1]
         
     def luckydraw():
         winner = random.randint(1,len(name)-1)
-        if occupation[winner] == "Student":
-            return name[winner], school[winner]
-        elif occupation[winner] == "Teacher": #teachers cant win
-            return luckydraw()
+        return name[winner], school[winner]
 
     def kindlewinner():#signups on pi day
         winner = random.randint(1,13)
-        if occupation[winner] == "Student":
-            return name[winner], school[winner]
-        elif occupation[winner] == "Teacher": #teachers cant win
-            return kindlewinner()
-        
+        return name[winner], school[winner]
+    
     def display(prize):
         if prize == "luckydraw":
             print("Winner is ",end = "")
