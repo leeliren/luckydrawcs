@@ -1,17 +1,22 @@
-import csv
-import random
-import time
+import csv, random, time, datetime
+
 with open('BuildingBloCS.csv',newline="") as csvfile:
     file = csv.reader(csvfile,delimiter = ',')
     occupation = []
     name = []
     school = []
+    day = []
+    chance = []
 
     for row in file:
         occupation.append(row[5])
         name.append(row[2])
         school.append(row[3])
-
+        date = row[0].split()[0]
+        day.append(date)
+    for i in day:
+        curr = datetime.date(
+        
     def luckydraw():
         winner = random.randint(1,len(name)-1)
         if occupation[winner] == "Student":
