@@ -23,9 +23,8 @@ with open('BuildingBloCS.csv',newline="") as csvfile:
         year = int(signupdate[i].split("/")[2])
         curr = datetime.date(year,month,day)
         realdate.append(curr)
-        print(realdate)
-    for i in range (len(realdate)-1),1:
-        if realdate[i+1]
+    print(realdate.reverse())
+    print(sorted(realdate,reverse = True))
         
     def luckydraw():
         winner = random.randint(1,len(name)-1)
@@ -49,4 +48,4 @@ with open('BuildingBloCS.csv',newline="") as csvfile:
             print(".",end = "")
         print(winner,"from", school, "!!")
 
-    display("kindle")
+    display("luckydraw")
