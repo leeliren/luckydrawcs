@@ -6,7 +6,6 @@ with open('BuildingBloCS.csv',newline="") as csvfile:
     name = []
     school = []
     signupdate = []#because of the first row
-    chance = []
     realdate = []
 
     for row in file:
@@ -16,36 +15,54 @@ with open('BuildingBloCS.csv',newline="") as csvfile:
         date = row[0].split()[0]
         signupdate.append(date)
         
-    chances = 1
     for i in range(1,len(signupdate)):
         month = int(signupdate[i].split("/")[0])
         day = int(signupdate[i].split("/")[1])
         year = int(signupdate[i].split("/")[2])
         curr = datetime.date(year,month,day)
         realdate.append(curr)
-    print(realdate.reverse())
-    print(sorted(realdate,reverse = True))
-        
+
+    dictionary = dict(zip(name, school))
+    realdate.reverse()
+    name.reverse()
+    namewchance = []
+    curr = None
+    count = 0
+
+    for i in range(len(school)-1):
+        if realdate[i] != curr:
+            curr = realdate[i]
+            count+=1
+            for j in range (count):
+                namewchance.append(name[i])
+        else:
+            for k in range(count):
+                namewchance.append(name[i])
+
     def luckydraw():
-        winner = random.randint(1,len(name)-1)
-        return name[winner], school[winner]
+        winner = random.randint(1,len(namewchance)-1)
+        person = namewchance[winner]
+        return person, dictionary[person]
 
     def kindlewinner():#signups on pi day
-        winner = random.randint(1,13)
-        return name[winner], school[winner]
+        winner = random.randint(-13,-1)
+        return name[winner], dictionary[name[winner]]
     
     def display(prize):
         if prize == "luckydraw":
             print("Winner is ",end = "")
-            winner = luckydraw()[0]
-            school = luckydraw()[1]
+            a = luckydraw()
+            winner = a[0]
+            school = a[1]
         elif prize == "kindle":
             print("Kindle winner is ",end = "")
-            winner = kindlewinner()[0]
-            school = kindlewinner()[1]
+            b = kindlewinner()
+            winner = b[0]
+            school = b[1]
         for i in range (4): #for the suspense :)
             time.sleep(.5)
             print(".",end = "")
         print(winner,"from", school, "!!")
 
     display("luckydraw")
+
